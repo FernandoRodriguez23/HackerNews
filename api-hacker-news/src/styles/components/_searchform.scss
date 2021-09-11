@@ -1,0 +1,33 @@
+@use '../themes/defualtThemes' as *;
+@use '../util/variables' as *;
+@use '../util/mixins' as *;
+
+
+
+.search-form{
+    width: 90vw;
+    max-width: $max-width;
+    margin: 0 auto;
+    margin-top: 5rem;
+    margin-bottom: 3rem;
+    .form-input{
+        width: 100%;
+        border: transparent;
+        max-width: $fixed-width;
+        background: $white;
+        padding: 1rem;
+        color: $black;
+        font-size: 1rem;
+        border-radius: $radius;
+        letter-spacing: $spacing;
+        margin-top: 1rem;
+    }
+    .error{
+        color: $red-dark;
+        text-transform: capitalize;
+        padding-top: .3rem;
+        letter-spacing: $spacing;
+        font-weight: 500;
+        font-size: 1.25rem;
+    }
+}
