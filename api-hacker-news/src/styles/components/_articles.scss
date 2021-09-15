@@ -1,0 +1,29 @@
+@use '../themes/defualtThemes' as *;
+@use '../util/variables' as *;
+@use '../util/mixins' as *;
+
+.article-container{
+    // width: 90vw;
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: 2rem;
+    margin-right: 2rem;
+    gap: 1.5rem;
+    @include flex-center;
+    .article{
+        flex: 40%;
+        text-align: center;
+        border: black solid 2px;
+        border-radius: $radius;
+        background: $white;
+        max-width: 500px;
+        
+    }
+    
+    
+    // .article{
+    //     margin: 0 auto;
+    //     overflow: hidden;
+    //     position: relative;
+    // }
+}
