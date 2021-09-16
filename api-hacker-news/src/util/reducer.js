@@ -15,10 +15,43 @@ export const reducer = (state, action) => {
             page: 0,
             query: action.payload,
         }
-        case "REMOVE_ARTICLE" :  {
-            const newHits = state.hits.filter((hit) => hit.objectID !== action.payload);
-            return {...state, newHits}
+        // case "REMOVE_ARTICLE" :  return {
+        //     ...state,
+        //     hits: state.hits.filter((hit) => hit.objectID !== action.payload),
+        // }
+        case "HANDLE_PAGE" :  {
+            if(action.payload === 'inc') {
+                let newPage = state.page +1;
+                if(newPage + 1 > state.nbPages){
+                    newPage = 0;
+                }
+                return {...state, page: newPage}
+            } else if (action.payload === 'dec') {
+                let newPage = state.page -1;
+                if(newPage < 0){
+                    newPage = state.nbPages -1;
+                }
+                return {...state, page: newPage}
+            }
         }
+        // case "NEXT_PAGE" : return {
+        //     ...state,
+        //     page: page == nbPages ? page++ : page == nbPages
+        //     // const nextPage = (page, nbPages) => {
+        //     //     if(page < nbPages){
+        //     //         page++;
+        //     //     }
+        //     // }
+        //     // return {...state, nextPage}
+        // }
+        // case "PREV_PAGE" : {
+        //     const prevPage = (page) => {
+        //         if(page !== 0) {
+        //             page--;
+        //         }
+        //     }
+        //     return {...state, prevPage}
+        // }
         default:
             throw new Error(`No Matching ${action.type} action type`);
     }

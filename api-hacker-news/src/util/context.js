@@ -2,7 +2,7 @@ import React, { useReducer, useContext, useEffect, useState} from 'react';
 import {reducer} from './reducer';
 
 
-const API_ENDPOINT = 'https://hn.angolia.com/api/v1/search?';
+const API_ENDPOINT = 'https://hn.algolia.com/api/v1/search?';
 
 const initialState = {
     loading: true,
@@ -16,7 +16,6 @@ const ArticleContext = React.createContext();
 
 export const ArticleProvider = ({children}) => {
     const [state, dispatch] = useReducer(reducer, initialState);
-    const [search, setSearch] = useState('React');
 
     const fetchArticles = async (url) => {
         dispatch({type: "SET_LOADING"});
@@ -34,12 +33,16 @@ export const ArticleProvider = ({children}) => {
         dispatch({type: "HANDLE_SEARCH", payload: query});
     }
 
+    const handlePage = (value) => {
+        dispatch({type: "HANDLE_PAGE", payload: value})
+    }
+
     useEffect(() => {
         fetchArticles(`${API_ENDPOINT}query=${state.query}&page=${state.page}`)
     }, [state.query, state.page]);
 
     return (
-        <ArticleContext.Provider value={{...state, handleSearch, search, setSearch}}>
+        <ArticleContext.Provider value={{...state, handleSearch, handlePage}}>
             {children}
         </ArticleContext.Provider>
     )

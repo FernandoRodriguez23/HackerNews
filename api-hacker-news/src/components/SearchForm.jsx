@@ -1,9 +1,12 @@
-import React from 'react';
+import React from 'react'
 import {useArticleContext} from '../util/context';
+// import {reducer} from '../util/reducer'
 
 function SearchForm() {
 
-    const {handleSearch, query, page, nbPages} = useArticleContext();
+    const {handleSearch, query, page, nbPages, loading, handlePage} = useArticleContext();
+    // const [state, dispatch] = useReducer(reducer)
+
 
     return (
         <div className="search-container">
@@ -14,11 +17,9 @@ function SearchForm() {
             </div>
             </form>
             <div className="page-move">
-                <button  >Prev</button>
-                {/* onClick={() => {page == 0 ? page : page--}} */}
-                <h3 className="pages">{page} of {nbPages}</h3>
-                <button  >Next</button>
-                {/* onClick={() => {page == nbPages ? page : page++}} */}
+                <button disabled={loading} onClick={() => handlePage('dec')} >Prev</button>
+                <h3 className="pages">{page + 1} of {nbPages}</h3>
+                <button disabled={loading} onClick={() => handlePage('inc')} >Next</button>
             </div>
         </div>
     )
